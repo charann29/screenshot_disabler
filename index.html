@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website Title</title>
+    <!-- JW Player Library -->
+    <script src="https://cdn.jwplayer.com/libraries/9xV5mvg9.js"></script>
+</head>
+<body>
+    <script>
+        // Disable right-clicking
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        var noPrint = true;
+        var noCopy = true;
+        var noScreenshot = true;
+        var autoBlur = false;
+
+        if (noCopy) 
+        { 
+            document.body.oncopy = function(){return false}; 
+            document.body.oncontextmenu = function(){return false}; 
+            document.body.onselectstart = document.body.ondrag = function(){
+                return false;
+            }
+            document.onkeydown = function() {
+                if((event.ctrlKey == true || event.metaKey == true) && event.keyCode == 83) {
+                    event.preventDefault();
+                }
+                if((event.ctrlKey == true || event.metaKey == true) && event.code == 83) {
+                    event.preventDefault();
+                }
+            }
+        }
+
+        var cssNode2 = document.createElement('style'); 
+        cssNode2.type = 'text/css'; 
+        cssNode2.media = 'screen'; 
+        cssNode2.innerHTML ='div{-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}';
+        document.head.appendChild(cssNode2);
+        document.body.style.cssText="-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;";
+
+
+        function toBlur()
+        {
+            if (autoBlur)
+            document.body.style.cssText="-webkit-filter: blur(5px);-moz-filter: blur(5px);-ms-filter: blur(5px);-o-filter: blur(5px);filter: blur(5px);"
+        }
+
+        function toClear()
+        {
+            document.body.style.cssText="-webkit-filter: blur(0px);-moz-filter: blur(0px);-ms-filter: blur(0px);-o-filter: blur(0px);filter: blur(0px);"
+        }
+
+        document.onclick = function(event){
+            toClear();
+        }
+        
+        document.onmouseleave = function(event){
+            toBlur();
+        }
+
+        document.onblur = function(event){
+            toBlur();
+        }
+
+        document.addEventListener('keyup', (e) => {
+            if (e.key == 'PrintScreen') {
+                if (noScreenshot)
+                {
+                navigator.clipboard.writeText('');
+            }
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key == 'p') {
+                if (noPrint)
+                    {
+                    e.cancelBubble = true;
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                }
+            }
+        });
+
+        document.addEventListener('keydown', function(event) {
+            // Check for Windows: Meta + Shift
+            if ((navigator.platform === 'Win32' || navigator.platform === 'Win64') && event.metaKey && event.shiftKey) {
+                document.body.style.backgroundColor = 'black';
+            }
+            // Check for Mac: Shift + Command
+            else if ((navigator.platform === 'MacIntel' || navigator.platform === 'MacPPC') && event.shiftKey && event.metaKey) {
+                document.body.style.backgroundColor = 'black';
+            }
+        });
+
+        // For mobile view, change background color when taking a screenshot
+        window.addEventListener('keyup', function(event) {
+            // Check if key pressed is 'PrintScreen'
+            if (event.key === 'PrintScreen') {
+                // Change background color to black
+                document.body.style.backgroundColor = 'black';
+            }
+        });
+    </script>
+
+    <h1>Welcome to My Website!!</h1>
+    <p>This is some dummy content for demonstration purposes.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget odio nec arcu ultrices convallis nec sit amet mauris. Integer id neque consequat, vehicula elit a, fermentum ex. Quisque consectetur quam nec volutpat vehicula. Donec malesuada ligula eu risus scelerisque, non posuere nunc tristique. Integer id malesuada est. Nam non ante tellus. Integer sed sapien eu tortor tempor blandit nec eget turpis. Integer rutrum eleifend lacus at efficitur. Nam eu enim rhoncus, ultricies ipsum ut, placerat mauris. Donec ac eros id tortor dignissim viverra.</p>
+    <p>Nulla facilisi. Fusce nec elit et orci pellentesque aliquet. Pellentesque euismod quam sit amet nunc consequat, et rhoncus velit volutpat. Cras vestibulum arcu vitae nisl hendrerit, at convallis purus posuere. Vestibulum fringilla auctor quam, ac dapibus mi finibus vitae. Donec sodales urna ut semper mattis. Cras vel metus nisi. Curabitur id commodo sapien, non congue nunc.</p>
+    <p>Morbi eleifend consequat purus, eget dictum libero eleifend et. Vestibulum fringilla volutpat neque, ut luctus libero tempus at. Duis vel magna a velit fermentum congue sit amet a eros. Praesent rutrum ipsum sit amet felis condimentum, nec tristique metus egestas. Nullam non consectetur purus. Integer finibus nibh vitae erat interdum, eget tempor justo consequat. Suspendisse consectetur eros velit, eu feugiat felis efficitur a. Aenean vehicula justo nec scelerisque tempus.</p>
+    <p>Quisque rhoncus urna eget tortor lobortis, a vehicula turpis scelerisque. Aliquam eleifend orci nisi, at congue neque scelerisque eget. Integer interdum vel libero id condimentum. Morbi pharetra velit eu feugiat scelerisque. Mauris vitae magna non tortor sodales rutrum non ac velit. Vivamus non tristique purus. Nullam aliquam sodales magna. Mauris ac rutrum justo. Cras viverra id nunc quis vestibulum. Sed vel elit id eros eleifend aliquam. Praesent vitae congue dolor, eget tincidunt nisi. Suspendisse at interdum sapien, vel ullamcorper velit.</p>
+</body>
+</html>
